@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Biblioteca_de_clases</id>
+    <version>1.0.0</version>
+    <authors>Biblioteca_de_clases</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net7.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="E:\Estudios\Universidad\Programacion2\PP_Escaner_LorenzoBuero\Biblioteca_de_clases\bin\Debug\net7.0\Biblioteca_de_clases.dll" target="lib\net7.0\Biblioteca_de_clases.dll" />
+  </files>
+</package>
