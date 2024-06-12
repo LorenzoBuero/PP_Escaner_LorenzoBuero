@@ -151,9 +151,9 @@ namespace Entidades
             foreach (Documento doc in e.listaDocumentos)
             {
 
-                
 
-                if (d.GetType() == doc.GetType())
+
+                if (d.GetType() == doc.GetType() && ((e.Tipo==TipoDoc.mapa && d is Mapa) || (e.Tipo == TipoDoc.libro && d is Libro)))
                 {
 
                     if (d.GetType() == typeof(Libro))
@@ -175,6 +175,11 @@ namespace Entidades
                             retorno = true;
                         }
                     }
+                }
+                else 
+                {
+                    throw new TipoIncorrectoException("Este escáner no acepta este tipo de documento", "Escaner.cs", "Sobrecarga ==(Escaner e, Documento d)");
+                    //El problema con esta excepción es que si se llama desde otro lado que no sea la sobrecarga del +, el código expota, pero la actividad lo pedía así
                 }
                 
             }
@@ -203,20 +208,27 @@ namespace Entidades
             bool retorno = false;
             //Console.WriteLine(d.GetType());
 
-            
-            if ((d.GetType() == typeof(Libro) && e.locacion == Departamento.procesosTecnicos) || (d.GetType() == typeof(Mapa) && e.locacion == Departamento.mapoteca))
+            try
             {
-                if (e != d && d.Estado == Documento.Paso.Inicio)
-                {
-                    
-
-                    if (d.AvanzarEstado() && d.Estado == Documento.Paso.Distribuido)
+                //if ((d.GetType() == typeof(Libro) && e.locacion == Departamento.procesosTecnicos) || (d.GetType() == typeof(Mapa) && e.locacion == Departamento.mapoteca))
+                //{
+                    if (e != d && d.Estado == Documento.Paso.Inicio)
                     {
-                        e.ListaDocumentos.Add(d);
-                        retorno = true;
+
+
+                        if (d.AvanzarEstado() && d.Estado == Documento.Paso.Distribuido)
+                        {
+                            e.ListaDocumentos.Add(d);
+                            retorno = true;
+                        }
                     }
-                }
-            }//else lanzar excepción?
+                //}
+            }
+            catch (TipoIncorrectoException tiex) 
+            {
+                
+                throw new TipoIncorrectoException("El documento no se pudo añadir a la lista", "Escaner.cs", "Sobrecarga +(Escaner e, Documento d)", tiex);
+            }//El problema con esta excepción es que si se usa esta sobrecarga sin hacer un try catch, el código expota, pero la actividad lo pedía así
 
 
             return retorno;

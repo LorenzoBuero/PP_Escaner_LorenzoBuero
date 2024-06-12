@@ -150,14 +150,14 @@ namespace Entidades
         /// Convierte el documento en un string que contiene el Titulo, el Autor y el Año
         /// </summary>
         /// <returns>string</returns>
-        public virtual string ToString() //resolver este errorcito
-        {
-            StringBuilder constructorTexto = new StringBuilder();//CÓMO HAGO PARA QUE CUANDO LO HAGA EN LIBRO, LEO LOS PRIMEROS 3, DESPUES MUESTRE UNA COSA DE LIBRO Y LUEGO MUESTRE EL CUARTO???????????
+        public override string ToString() { 
+            StringBuilder constructorTexto = new StringBuilder();
 
             constructorTexto.Append("Titulo: " + this.Titulo.ToString() + "\n");
             constructorTexto.Append("Autor: " + this.Autor.ToString() + "\n");
-            constructorTexto.Append("Año: " + this.Anio.ToString());//hace falta + "\n"???
-            
+            constructorTexto.Append("Año: " + this.Anio.ToString() + "\n");//hace falta + "\n"???
+            if (this is Libro) { constructorTexto.Append("ISBN: " + this.NumNormalizado + "\n"); }
+            constructorTexto.Append("Cód. de barras: " + this.Barcode.ToString() + "\n");
 
 
             return constructorTexto.ToString();

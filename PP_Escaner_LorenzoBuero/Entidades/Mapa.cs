@@ -64,7 +64,6 @@ namespace Entidades
             StringBuilder constructorTexto = new StringBuilder();
 
             constructorTexto.Append(base.ToString() + "\n");
-            constructorTexto.Append("Cód. de barras: " + this.Barcode.ToString() + "\n");
             constructorTexto.Append("Superficie: " + this.Alto.ToString() + " * " + this.Ancho.ToString() + " = " + this.Superficie.ToString() + " cm2.\n");
 
             return constructorTexto.ToString();
